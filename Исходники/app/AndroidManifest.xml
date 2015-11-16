@@ -16,16 +16,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProductList"
-            android:label="Список продуктов" >
-    </activity>
-        <activity
-            android:name=".CreateProduct"
-            android:label="Создание новой записи">
+            android:name=".CategoryList"
+            android:label="Список категорий" >
         </activity>
         <activity
             android:name=".StatisticActivity"
-            android:label="Статистика">
+            android:label="Статистика" >
+        </activity>
+        <activity android:name=".MyLists"
+            android:label="Мои списки">
+        </activity>
+        <activity android:name=".List"
+            android:label="Содержимое списка">
+        </activity>
+        <activity android:name=".AddNewProduct"
+            android:label="Категории продуктов">
+        </activity>
+        <activity android:name=".CategoryProductsList"
+            android:label="Продукты">
         </activity>
     </application>
 
