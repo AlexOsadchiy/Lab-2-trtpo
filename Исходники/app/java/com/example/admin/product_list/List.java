@@ -92,11 +92,6 @@ public class List extends AppCompatActivity implements View.OnClickListener {
         dbCursor = db.query("products", null, null, null, null, null, null);
         twoCursor = dbCursor;
 
-
-
-
-
-
         if (dbCursor.getCount() > 0) {
 
             int count = 0;
@@ -107,7 +102,7 @@ public class List extends AppCompatActivity implements View.OnClickListener {
 
                         Map<String, String> datum = new HashMap<String, String>(2);
                         datum.put("Имя", dbCursor.getString(dbCursor.getColumnIndex("name")));
-                        datum.put("Стоимость",dbCursor.getString(dbCursor.getColumnIndex("price")).toString());
+                        datum.put("Стоимость", dbCursor.getString(dbCursor.getColumnIndex("price")).toString());
                         data.add(datum);
                         count++;
                     }
@@ -143,7 +138,13 @@ public class List extends AppCompatActivity implements View.OnClickListener {
                     Log.d("QQQ: ", "Long Tab" + data.get(arg2).get("Имя").toString());
 
                     db.delete("products", "listname = ? and name = ?", new String[]{listName, data.get(arg2).get("Имя").toString()});
-                    update();
+                    dbCursor = db.query("products", null, null, null, null, null, null);
+                    if(dbCursor.getCount() > 0){
+                        update();
+                    }else{
+                        data.clear();
+                        adapter.notifyDataSetChanged();
+                    }
                     return false;
                     }
                 }

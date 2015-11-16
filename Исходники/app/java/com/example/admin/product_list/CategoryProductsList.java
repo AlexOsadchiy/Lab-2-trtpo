@@ -53,8 +53,8 @@ public class CategoryProductsList extends AppCompatActivity implements View.OnCl
         categoryNameS = intent.getExtras().getString("CATEGORY_NAME");
         productListName = intent.getExtras().getString("LIST_NAME");
 
-        addNewProduct = (Button)findViewById(R.id.addToList);
-        addNewProduct.setOnClickListener(this);
+//        addNewProduct = (Button)findViewById(R.id.addToList);
+//        addNewProduct.setOnClickListener(this);
 
         listView = (ListView) findViewById(R.id.listWithProductFromCategory);
 
@@ -72,7 +72,7 @@ public class CategoryProductsList extends AppCompatActivity implements View.OnCl
         public void onClick(View v) {
                 switch (v.getId()) {
                 case R.id.addToList:
-                    addSvoiProduct();
+                    //addSvoiProduct();
                 break;
         default:
                 break;
@@ -83,10 +83,11 @@ public class CategoryProductsList extends AppCompatActivity implements View.OnCl
     public void update_products() {
         // проверка существования записей
         c = db.query("defaultProducts", null, null, null, null, null, null);
-        java.util.List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+        final java.util.List<Map<String, String>> data = new ArrayList<Map<String, String>>();
         if (c.getCount() > 0) {
 
-//            final ArrayList<String> categoryesArray = new ArrayList<String>();
+
+
 
             if (c.moveToFirst()) {
                 do {
@@ -109,6 +110,10 @@ public class CategoryProductsList extends AppCompatActivity implements View.OnCl
 
 
             listView.setAdapter(adapter);
+
+
+
+
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
@@ -118,9 +123,9 @@ public class CategoryProductsList extends AppCompatActivity implements View.OnCl
                     if (c.moveToFirst()) {
                         do {
                             if(c.getString(c.getColumnIndex("category")).equals(categoryNameS) &&
-                                    c.getString(c.getColumnIndex("name")).equals(((TextView)(findViewById(android.R.id.text1))).getText().toString()))
+                                    c.getString(c.getColumnIndex("name")).equals(data.get(position).get("Имя: ").toString()))
                             {
-//                                Log.d("!!!!!!!!!!!!!!!!!!: ", String.valueOf((TextView)findViewById(android.R.id.text1)));
+                                Log.d("!!!!!!!!!!!!!!!!!!: ", data.get(position).get("Имя: ").toString());
                                 cv.put("category", c.getString(c.getColumnIndex("category")));
                                 cv.put("name", c.getString(c.getColumnIndex("name")));
                                 cv.put("count", Integer.parseInt(c.getString(c.getColumnIndex("count"))));
@@ -150,7 +155,7 @@ public class CategoryProductsList extends AppCompatActivity implements View.OnCl
         alertDialogBuilder.setView(promptView);
         final EditText inputCategory = (EditText) promptView.findViewById(R.id.categoryText);
         final EditText inputName = (EditText) promptView.findViewById(R.id.nameText);
-        final EditText inputCount = (EditText) promptView.findViewById(R.id.countText);
+        //final EditText inputCount = (EditText) promptView.findViewById(R.id.countText);
         final EditText inputPrice = (EditText) promptView.findViewById(R.id.priceText);
 
 
@@ -160,7 +165,7 @@ public class CategoryProductsList extends AppCompatActivity implements View.OnCl
                     public void onClick(DialogInterface dialog, int id) {
 
                         contentValues.put("category", inputCategory.getText().toString());
-                        contentValues.put("count", String.valueOf(inputCount.getText().toString()));
+                        contentValues.put("count", 1);
                         contentValues.put("name", inputName.getText().toString());
                         contentValues.put("price", String.valueOf(inputPrice.getText().toString()));
                         db.insert("defaultProducts", null, contentValues);

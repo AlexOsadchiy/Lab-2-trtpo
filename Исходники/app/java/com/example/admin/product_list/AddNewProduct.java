@@ -119,7 +119,7 @@ public class AddNewProduct extends AppCompatActivity  implements View.OnClickLis
         alertDialogBuilder.setView(promptView);
         final EditText inputCategory = (EditText) promptView.findViewById(R.id.categoryText);
         final EditText inputName = (EditText) promptView.findViewById(R.id.nameText);
-        final EditText inputCount = (EditText) promptView.findViewById(R.id.countText);
+        //final EditText inputCount = (EditText) promptView.findViewById(R.id.countText);
         final EditText inputPrice = (EditText) promptView.findViewById(R.id.priceText);
 
 
@@ -130,7 +130,7 @@ public class AddNewProduct extends AppCompatActivity  implements View.OnClickLis
 
 
                         contentValues.put("category", inputCategory.getText().toString());
-                        contentValues.put("count", String.valueOf(inputCount.getText().toString()));
+                        contentValues.put("count", 1);
                         contentValues.put("name", inputName.getText().toString());
                         contentValues.put("price", String.valueOf(inputPrice.getText().toString()));
                         db.insert("defaultProducts", null, contentValues);
